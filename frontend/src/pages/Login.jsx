@@ -10,9 +10,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // API logic will go here
     console.log('Login attempt', { email, password });
-    // Mock login success
     navigate('/dashboard'); 
   };
 
@@ -26,6 +24,7 @@ const Login = () => {
         style={styles.card}
       >
         <div style={styles.header}>
+          <div style={styles.logo}>🍕 Pizza Artisan</div>
           <h1 style={styles.title}>Welcome Back</h1>
           <p style={styles.subtitle}>Log in to satisfy your cravings</p>
         </div>
@@ -41,7 +40,7 @@ const Login = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                style={{ paddingLeft: '40px', width: '100%' }}
+                style={{ paddingLeft: '45px', width: '100%' }}
               />
             </div>
           </div>
@@ -59,7 +58,7 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                style={{ paddingLeft: '40px', width: '100%' }}
+                style={{ paddingLeft: '45px', width: '100%' }}
               />
             </div>
           </div>
@@ -89,28 +88,39 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: '20px'
+    padding: '20px',
+    background: 'var(--bg-color)',
+    backgroundImage: 'url("https://images.unsplash.com/photo-1590947132387-155cc02f3212?auto=format&fit=crop&w=1920&q=80")',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
   },
   card: {
     width: '100%',
     maxWidth: '440px',
     padding: '40px',
+    backgroundColor: 'var(--surface-color)',
+    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
   },
   header: {
     textAlign: 'center',
-    marginBottom: '32px'
+    marginBottom: '35px'
+  },
+  logo: {
+    fontSize: '2.5rem',
+    marginBottom: '15px',
+    fontWeight: '800',
+    color: 'var(--primary-color)'
   },
   title: {
-    fontSize: '2rem',
-    fontWeight: '700',
+    fontSize: '1.8rem',
+    fontWeight: '800',
     marginBottom: '8px',
-    background: 'linear-gradient(to right, #ff5e3a, #ff9a44)',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent'
+    color: 'var(--text-primary)'
   },
   subtitle: {
     color: 'var(--text-secondary)',
-    fontSize: '1rem'
+    fontSize: '1rem',
+    fontWeight: '500'
   },
   form: {
     display: 'flex',
@@ -123,7 +133,7 @@ const styles = {
   },
   icon: {
     position: 'absolute',
-    left: '14px',
+    left: '16px',
     color: 'var(--text-secondary)',
     fontSize: '1.2rem'
   },
@@ -133,24 +143,26 @@ const styles = {
     alignItems: 'center'
   },
   forgotLink: {
-    fontSize: '0.85rem',
+    fontSize: '0.9rem',
     color: 'var(--primary-color)',
-    fontWeight: '500'
+    fontWeight: '600'
   },
   submitBtn: {
-    marginTop: '16px',
-    padding: '14px',
-    fontSize: '1.05rem'
+    marginTop: '20px',
+    padding: '16px',
+    fontSize: '1.1rem',
+    borderRadius: '12px'
   },
   footerText: {
-    marginTop: '32px',
+    marginTop: '35px',
     textAlign: 'center',
     color: 'var(--text-secondary)',
     fontSize: '0.95rem'
   },
   link: {
     color: 'var(--primary-color)',
-    fontWeight: '600'
+    fontWeight: '700',
+    marginLeft: '5px'
   }
 };
 
