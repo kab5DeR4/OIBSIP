@@ -9,9 +9,6 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Don't show navbar on auth pages
-  if (location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/' || location.pathname === '/admin-login') return null;
-
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -19,6 +16,9 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Don't show navbar on auth pages
+  if (location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/' || location.pathname === '/admin-login') return null;
 
   return (
     <motion.nav 
