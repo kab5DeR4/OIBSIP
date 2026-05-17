@@ -78,6 +78,17 @@ const Login = () => {
           Don't have an account? <Link to="/register" style={styles.link}>Create one now</Link>
         </p>
       </motion.div>
+
+      {/* Secret Admin Button */}
+      <motion.button
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={() => navigate('/admin')}
+        style={styles.adminBtn}
+        title="Admin Portal"
+      >
+        Admin Access
+      </motion.button>
     </div>
   );
 };
@@ -90,9 +101,10 @@ const styles = {
     justifyContent: 'center',
     padding: '20px',
     background: 'var(--bg-color)',
-    backgroundImage: 'url("https://images.unsplash.com/photo-1590947132387-155cc02f3212?auto=format&fit=crop&w=1920&q=80")',
+    backgroundImage: 'url("/images/hero.jpg")',
     backgroundSize: 'cover',
-    backgroundPosition: 'center'
+    backgroundPosition: 'center',
+    position: 'relative' // Needed for absolute positioning of admin button
   },
   card: {
     width: '100%',
@@ -163,6 +175,21 @@ const styles = {
     color: 'var(--primary-color)',
     fontWeight: '700',
     marginLeft: '5px'
+  },
+  adminBtn: {
+    position: 'absolute',
+    bottom: '20px',
+    right: '20px',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    color: 'rgba(255,255,255,0.7)',
+    border: '1px solid rgba(255,255,255,0.2)',
+    padding: '8px 16px',
+    borderRadius: '6px',
+    fontSize: '0.8rem',
+    cursor: 'pointer',
+    backdropFilter: 'blur(4px)',
+    fontWeight: '600',
+    transition: 'all 0.3s ease'
   }
 };
 

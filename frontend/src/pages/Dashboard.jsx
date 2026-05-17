@@ -3,14 +3,14 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
 const mockPizzas = [
-  { id: 1, name: 'Classic Margherita', price: 199, description: 'Authentic Neapolitan pizza with San Marzano tomato sauce, fresh mozzarella, and basil.', image: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80' },
-  { id: 2, name: 'Farmhouse Veggie', price: 299, description: 'Delightful combination of onion, capsicum, tomato, and fresh mushrooms.', image: 'https://images.unsplash.com/photo-1593504049359-74330189a345?auto=format&fit=crop&w=600&q=80' },
-  { id: 3, name: 'Peppy Paneer', price: 349, description: 'Flavorful trio of juicy paneer, crisp capsicum with spicy red paprika.', image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80' },
-  { id: 4, name: 'Double Pepperoni', price: 399, description: 'Loaded with premium pepperoni slices and extra mozzarella cheese.', image: 'https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=600&q=80' },
-  { id: 5, name: 'BBQ Chicken', price: 449, description: 'Smoked BBQ chicken chunks, red onions, and a drizzle of tangy BBQ sauce.', image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80' },
-  { id: 6, name: 'Spicy Italian', price: 429, description: 'Italian sausage, spicy salami, jalapeños, and crushed red pepper.', image: 'https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?auto=format&fit=crop&w=600&q=80' },
-  { id: 7, name: 'Mushroom Truffle', price: 499, description: 'Wild mushrooms, truffle oil, roasted garlic, and parmesan cream base.', image: 'https://images.unsplash.com/photo-1528137871618-79d2761e3fd5?auto=format&fit=crop&w=600&q=80' },
-  { id: 8, name: 'Four Cheese', price: 379, description: 'A decadent blend of Mozzarella, Gorgonzola, Parmesan, and Ricotta.', image: 'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?auto=format&fit=crop&w=600&q=80' }
+  { id: 1, name: 'Classic Margherita', price: 199, description: 'Authentic Neapolitan pizza with San Marzano tomato sauce, fresh mozzarella, and basil.', image: '/images/pizza-1.jpg' },
+  { id: 2, name: 'Farmhouse Veggie', price: 299, description: 'Delightful combination of onion, capsicum, tomato, and fresh mushrooms.', image: '/images/pizza-2.jpg' },
+  { id: 3, name: 'Peppy Paneer', price: 349, description: 'Flavorful trio of juicy paneer, crisp capsicum with spicy red paprika.', image: '/images/pizza-3.jpg' },
+  { id: 4, name: 'Double Pepperoni', price: 399, description: 'Loaded with premium pepperoni slices and extra mozzarella cheese.', image: '/images/pizza-4.jpg' },
+  { id: 5, name: 'BBQ Chicken', price: 449, description: 'Smoked BBQ chicken chunks, red onions, and a drizzle of tangy BBQ sauce.', image: '/images/pizza-5.jpg' },
+  { id: 6, name: 'Spicy Italian', price: 429, description: 'Italian sausage, spicy salami, jalapeños, and crushed red pepper.', image: '/images/pizza-6.jpg' },
+  { id: 7, name: 'Mushroom Truffle', price: 499, description: 'Wild mushrooms, truffle oil, roasted garlic, and parmesan cream base.', image: '/images/pizza-7.jpg' },
+  { id: 8, name: 'Four Cheese', price: 379, description: 'A decadent blend of Mozzarella, Gorgonzola, Parmesan, and Ricotta.', image: '/images/pizza-8.jpg' }
 ];
 
 const features = [
@@ -190,7 +190,7 @@ const styles = {
     height: '70vh',
     minHeight: '500px',
     position: 'relative',
-    backgroundImage: 'url(https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1920&q=80)',
+    backgroundImage: 'url(/images/hero.jpg)',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundAttachment: 'fixed',

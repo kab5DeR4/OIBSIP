@@ -3,34 +3,34 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const MOCK_DATA = {
   bases: [
-    { name: 'Thin Crust', image: 'https://images.unsplash.com/photo-1590947132387-155cc02f3212?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Hand Tossed', image: 'https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Cheese Burst', image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Pan Pizza', image: 'https://images.unsplash.com/photo-1588315029754-2dd089d39a1a?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Gluten Free', image: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=300&q=80' }
+    { name: 'Thin Crust', image: '/images/base-thin.jpg' },
+    { name: 'Hand Tossed', image: '/images/base-hand.jpg' },
+    { name: 'Cheese Burst', image: '/images/base-cheese.jpg' },
+    { name: 'Pan Pizza', image: '/images/base-pan.jpg' },
+    { name: 'Gluten Free', image: '/images/base-gluten.jpg' }
   ],
   sauces: [
-    { name: 'Tomato Marinara', image: 'https://images.unsplash.com/photo-1600803907087-f56d462fd26b?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Pesto', image: 'https://images.unsplash.com/photo-1596450514735-111a2fe02935?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Garlic Parmesan', image: 'https://images.unsplash.com/photo-1618449840665-9ed506d73a34?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Barbecue', image: 'https://images.unsplash.com/photo-1626082895617-2c6ad3ed327c?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Spicy Buffalo', image: 'https://images.unsplash.com/photo-1620189507195-68309c04c4d0?auto=format&fit=crop&w=300&q=80' }
+    { name: 'Tomato Marinara', image: '/images/sauce-tomato.jpg' },
+    { name: 'Pesto', image: '/images/sauce-pesto.jpg' },
+    { name: 'Garlic Parmesan', image: '/images/sauce-garlic.jpg' },
+    { name: 'Barbecue', image: '/images/sauce-spicy.jpg' }, // fallback
+    { name: 'Spicy Buffalo', image: '/images/sauce-spicy.jpg' }
   ],
   cheeses: [
-    { name: 'Mozzarella', image: 'https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Cheddar', image: 'https://images.unsplash.com/photo-1618164436241-4473940d1fce?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Parmesan', image: 'https://images.unsplash.com/photo-1632598337775-8121d5c2f300?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Vegan Cheese', image: 'https://images.unsplash.com/photo-1611143669185-af224c5e3252?auto=format&fit=crop&w=300&q=80' }
+    { name: 'Mozzarella', image: '/images/cheese-mozzarella.jpg' },
+    { name: 'Cheddar', image: '/images/cheese-mozzarella.jpg' }, // fallback
+    { name: 'Parmesan', image: '/images/cheese-vegan.jpg' }, // fallback
+    { name: 'Vegan Cheese', image: '/images/cheese-vegan.jpg' }
   ],
   veggies: [
-    { name: 'Onion', image: 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Capsicum', image: 'https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Mushroom', image: 'https://images.unsplash.com/photo-1511688878353-3a2f5be94cd7?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Olive', image: 'https://images.unsplash.com/photo-1505253758473-96b7015fcd40?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Jalapeno', image: 'https://images.unsplash.com/photo-1506807803488-8eafc15316c7?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Corn', image: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Spinach', image: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=300&q=80' },
-    { name: 'Pineapple', image: 'https://images.unsplash.com/photo-1550258987-190a2d41a8ba?auto=format&fit=crop&w=300&q=80' }
+    { name: 'Onion', image: '/images/veg-onion.jpg' },
+    { name: 'Capsicum', image: '/images/veg-capsicum.jpg' },
+    { name: 'Mushroom', image: '/images/veg-mushroom.jpg' },
+    { name: 'Olive', image: '/images/veg-olive.jpg' },
+    { name: 'Jalapeno', image: '/images/veg-jalapeno.jpg' },
+    { name: 'Corn', image: '/images/veg-corn.jpg' },
+    { name: 'Spinach', image: '/images/veg-spinach.jpg' },
+    { name: 'Pineapple', image: '/images/veg-pineapple.jpg' }
   ]
 };
 
