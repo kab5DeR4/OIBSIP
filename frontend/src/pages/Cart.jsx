@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import RazorpayMock from '../components/RazorpayMock';
 
 const Cart = () => {
+  const navigate = useNavigate();
   const [showPayment, setShowPayment] = useState(false);
   const [orderStatus, setOrderStatus] = useState(null);
 
@@ -46,7 +48,7 @@ const Cart = () => {
           <div style={styles.statusBox}>
             <strong style={{ color: 'var(--text-secondary)' }}>Current Status:</strong> <span style={{ color: 'var(--primary-color)', fontWeight: 'bold', fontSize: '1.2rem', marginLeft: '10px' }}>In the Kitchen 👨‍🍳</span>
           </div>
-          <button className="btn-primary" style={{ marginTop: '30px', width: '100%' }} onClick={() => window.location.href = '/dashboard'}>
+          <button className="btn-primary" style={{ marginTop: '30px', width: '100%' }} onClick={() => navigate('/dashboard')}>
             Back to Menu
           </button>
         </motion.div>

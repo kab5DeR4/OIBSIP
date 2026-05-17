@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const MOCK_DATA = {
   bases: [
@@ -13,13 +14,13 @@ const MOCK_DATA = {
     { name: 'Tomato Marinara', image: '/images/sauce-tomato.jpg' },
     { name: 'Pesto', image: '/images/sauce-pesto.jpg' },
     { name: 'Garlic Parmesan', image: '/images/sauce-garlic.jpg' },
-    { name: 'Barbecue', image: '/images/sauce-spicy.jpg' }, // fallback
+    { name: 'Barbecue', image: '/images/sauce-bbq.jpg' },
     { name: 'Spicy Buffalo', image: '/images/sauce-spicy.jpg' }
   ],
   cheeses: [
     { name: 'Mozzarella', image: '/images/cheese-mozzarella.jpg' },
-    { name: 'Cheddar', image: '/images/cheese-mozzarella.jpg' }, // fallback
-    { name: 'Parmesan', image: '/images/cheese-vegan.jpg' }, // fallback
+    { name: 'Cheddar', image: '/images/cheese-cheddar.jpg' },
+    { name: 'Parmesan', image: '/images/cheese-parmesan.jpg' },
     { name: 'Vegan Cheese', image: '/images/cheese-vegan.jpg' }
   ],
   veggies: [
@@ -37,6 +38,7 @@ const MOCK_DATA = {
 const STEPS = ['Base', 'Sauce', 'Cheese', 'Veggies', 'Review'];
 
 const CustomPizzaBuilder = () => {
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
   const [selections, setSelections] = useState({
     base: '',
@@ -139,7 +141,7 @@ const CustomPizzaBuilder = () => {
             </div>
             <div style={styles.summaryItem}>
               <span style={styles.summaryLabel}>Veggies</span>
-              <span style={styles.summaryValue}>{selections.veggies.length > 0 ? `${selections.veggies.length} selected` : '---'}</span>
+              <span style={styles.summaryValue}>{selections.veggies.length > 0 ? selections.veggies.join(', ') : '---'}</span>
             </div>
           </div>
           <div style={styles.summaryTotal}>
@@ -258,7 +260,7 @@ const CustomPizzaBuilder = () => {
                 <motion.button 
                   className="btn-primary" 
                   style={{ background: 'var(--success)', boxShadow: '0 4px 14px rgba(16, 185, 129, 0.3)', padding: '16px 40px', fontSize: '1.1rem' }} 
-                  onClick={() => window.location.href = '/cart'}
+                  onClick={() => navigate('/cart')}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >

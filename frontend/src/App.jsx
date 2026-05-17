@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard';
 import CustomPizzaBuilder from './pages/CustomPizzaBuilder';
 import Cart from './pages/Cart';
 import AdminDashboard from './pages/AdminDashboard';
+import AdminLogin from './pages/AdminLogin';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
@@ -23,6 +24,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/build-pizza" element={<CustomPizzaBuilder />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/admin-login" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
         </main>

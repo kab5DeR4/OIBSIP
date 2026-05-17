@@ -1,15 +1,16 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiShoppingCart, FiUser, FiLogOut, FiMenu } from 'react-icons/fi';
 import { useState, useEffect } from 'react';
 
 const Navbar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Don't show navbar on auth pages
-  if (location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/') return null;
+  if (location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/' || location.pathname === '/admin-login') return null;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,7 +56,7 @@ const Navbar = () => {
             whileHover={{ scale: 1.05 }} 
             whileTap={{ scale: 0.95 }} 
             style={styles.logoutBtn}
-            onClick={() => window.location.href = '/login'}
+            onClick={() => navigate('/login')}
           >
             <FiLogOut size={18} />
             <span style={styles.logoutText}>Logout</span>

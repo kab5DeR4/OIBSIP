@@ -83,7 +83,7 @@ const Login = () => {
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        onClick={() => navigate('/admin')}
+        onClick={() => navigate('/admin-login')}
         style={styles.adminBtn}
         title="Admin Portal"
       >
