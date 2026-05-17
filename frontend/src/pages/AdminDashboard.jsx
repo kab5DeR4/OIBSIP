@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiEdit2, FiCheck, FiRefreshCw } from 'react-icons/fi';
+import { StoreContext } from '../context/StoreContext';
 
 const MOCK_INVENTORY = [
   { id: 1, category: 'Base', name: 'Thin Crust', stock: 15, threshold: 20 },
@@ -20,7 +21,7 @@ const STATUS_OPTIONS = ['Order Received', 'In the kitchen', 'Sent to delivery', 
 
 const AdminDashboard = () => {
   const [inventory, setInventory] = useState(MOCK_INVENTORY);
-  const [orders, setOrders] = useState(MOCK_ORDERS);
+  const { orders, setOrders, updateOrderStatus } = useContext(StoreContext);
   const [editingId, setEditingId] = useState(null);
   const [editValue, setEditValue] = useState('');
   const [refreshing, setRefreshing] = useState(false);
@@ -64,7 +65,7 @@ const AdminDashboard = () => {
   }, []);
 
   const handleStatusChange = (orderId, newStatus) => {
-    setOrders(orders.map(o => o.id === orderId ? { ...o, status: newStatus } : o));
+    updateOrderStatus(orderId, newStatus);
   };
 
   const startEditing = (item) => {

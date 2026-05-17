@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { StoreContext } from '../context/StoreContext';
 
 const MOCK_DATA = {
   bases: [
@@ -39,6 +40,7 @@ const STEPS = ['Base', 'Sauce', 'Cheese', 'Veggies', 'Review'];
 
 const CustomPizzaBuilder = () => {
   const navigate = useNavigate();
+  const { addToCart } = useContext(StoreContext);
   const [currentStep, setCurrentStep] = useState(0);
   const [selections, setSelections] = useState({
     base: '',
@@ -260,7 +262,16 @@ const CustomPizzaBuilder = () => {
                 <motion.button 
                   className="btn-primary" 
                   style={{ background: 'var(--success)', boxShadow: '0 4px 14px rgba(16, 185, 129, 0.3)', padding: '16px 40px', fontSize: '1.1rem' }} 
-                  onClick={() => navigate('/cart')}
+                  onClick={() => {
+                    addToCart({
+                      id: Date.now(),
+                      name: 'Custom Built Pizza',
+                      details: `Base: ${selections.base}, Sauce: ${selections.sauce}, Cheese: ${selections.cheese}, Veggies: ${selections.veggies.join(', ')}`,
+                      price: 450,
+                      image: '/images/pizza-bg.jpg'
+                    });
+                    navigate('/cart');
+                  }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >

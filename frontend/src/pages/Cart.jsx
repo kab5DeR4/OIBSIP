@@ -1,18 +1,14 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import RazorpayMock from '../components/RazorpayMock';
+import { StoreContext } from '../context/StoreContext';
 
 const Cart = () => {
   const navigate = useNavigate();
   const [showPayment, setShowPayment] = useState(false);
   const [orderStatus, setOrderStatus] = useState(null);
-
-  // Mock cart items (Normally this would come from Context/Redux)
-  const cartItems = [
-    { id: 1, name: 'Classic Margherita', details: 'Regular crust', price: 199, image: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=150&q=80' },
-    { id: 2, name: 'Custom Pizza', details: 'Pan Pizza, Alfredo, Mozzarella, Olive', price: 450, image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=150&q=80' }
-  ];
+  const { cartItems, clearCart, placeOrder } = useContext(StoreContext);
 
   const subtotal = cartItems.reduce((acc, item) => acc + item.price, 0);
   const taxes = Math.round(subtotal * 0.05); // 5% GST
@@ -22,6 +18,8 @@ const Cart = () => {
   const handlePaymentSuccess = (paymentData) => {
     console.log('Payment Successful:', paymentData);
     setShowPayment(false);
+    placeOrder(total, cartItems);
+    clearCart();
     setOrderStatus('success');
   };
 
@@ -50,6 +48,20 @@ const Cart = () => {
           </div>
           <button className="btn-primary" style={{ marginTop: '30px', width: '100%' }} onClick={() => navigate('/dashboard')}>
             Back to Menu
+          </button>
+        </motion.div>
+      </div>
+    );
+  }
+
+  if (cartItems.length === 0) {
+    return (
+      <div style={styles.container}>
+        <motion.div className="glass-panel" style={{...styles.card, textAlign: 'center', padding: '60px 20px'}}>
+          <h2 style={{color: 'var(--text-primary)', marginBottom: '20px'}}>Your Cart is Empty</h2>
+          <p style={{color: 'var(--text-secondary)', marginBottom: '30px'}}>Looks like you haven't added any delicious pizzas yet.</p>
+          <button className="btn-primary" style={{ padding: '12px 30px' }} onClick={() => navigate('/dashboard')}>
+            Explore Menu
           </button>
         </motion.div>
       </div>

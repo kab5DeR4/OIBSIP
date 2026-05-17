@@ -1,13 +1,15 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiShoppingCart, FiUser, FiLogOut, FiMenu } from 'react-icons/fi';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { StoreContext } from '../context/StoreContext';
 
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { cartItems } = useContext(StoreContext);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,14 +44,13 @@ const Navbar = () => {
         <div style={styles.navLinks}>
           <Link to="/dashboard" style={styles.link(location.pathname === '/dashboard')}>Menu</Link>
           <Link to="/build-pizza" style={styles.link(location.pathname === '/build-pizza')}>Custom Builder</Link>
-          <Link to="/admin" style={styles.link(location.pathname === '/admin')}>Admin</Link>
         </div>
 
         <div style={styles.actions}>
           <Link to="/cart">
             <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} style={styles.iconBtn}>
               <FiShoppingCart size={22} />
-              <span style={styles.badge}>2</span>
+              {cartItems.length > 0 && <span style={styles.badge}>{cartItems.length}</span>}
             </motion.div>
           </Link>
           <motion.button 
@@ -78,7 +79,6 @@ const Navbar = () => {
         >
           <Link to="/dashboard" style={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>Menu</Link>
           <Link to="/build-pizza" style={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>Custom Builder</Link>
-          <Link to="/admin" style={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>Admin</Link>
         </motion.div>
       )}
     </motion.nav>

@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { StoreContext } from '../context/StoreContext';
 
 const mockPizzas = [
   { id: 1, name: 'Classic Margherita', price: 199, description: 'Authentic Neapolitan pizza with San Marzano tomato sauce, fresh mozzarella, and basil.', image: '/images/pizza-1.jpg' },
@@ -22,6 +23,7 @@ const features = [
 const Dashboard = () => {
   const navigate = useNavigate();
   const [hoveredId, setHoveredId] = useState(null);
+  const { addToCart } = useContext(StoreContext);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -138,6 +140,15 @@ const Dashboard = () => {
                     style={styles.orderBtn}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      addToCart({
+                        id: Date.now(),
+                        name: pizza.name,
+                        details: 'Regular crust',
+                        price: pizza.price,
+                        image: pizza.image
+                      });
+                    }}
                   >
                     Add to Cart
                   </motion.button>
