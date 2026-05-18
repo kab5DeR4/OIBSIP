@@ -1,26 +1,94 @@
 import { useState, useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import RazorpayMock from '../components/RazorpayMock';
 import { StoreContext } from '../context/StoreContext';
 
 const Cart = () => {
   const navigate = useNavigate();
-  const [showPayment, setShowPayment] = useState(false);
   const [orderStatus, setOrderStatus] = useState(null);
   const { cartItems, clearCart, placeOrder } = useContext(StoreContext);
 
-  const subtotal = cartItems.reduce((acc, item) => acc + item.price, 0);
+  // calculate total price
+  let subtotal = 0;
+  for (let i = 0; i < cartItems.length; i++) {
+    subtotal += cartItems[i].price;
+  }
+  
   const taxes = Math.round(subtotal * 0.05); // 5% GST
   const delivery = 40;
   const total = subtotal + taxes + delivery;
+  const API_URL = import.meta.env.MODE === 'production' 
+    ? (import.meta.env.VITE_API_URL || '') 
+    : (import.meta.env.VITE_API_URL || 'http://localhost:5000');
 
-  const handlePaymentSuccess = (paymentData) => {
-    console.log('Payment Successful:', paymentData);
-    setShowPayment(false);
-    placeOrder(total, cartItems);
-    clearCart();
-    setOrderStatus('success');
+  const initPayment = async () => {
+    try {
+      const res = await fetch(`${API_URL}/api/payment/create-order`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: total })
+      });
+      const data = await res.json();
+
+      if (!data.success) {
+        alert('Failed to initiate payment. Please try again.');
+        return;
+      }
+
+      const options = {
+        key: 'rzp_test_SqjPdki0XMhdpO', // Test Key ID provided
+        amount: data.amount,
+        currency: data.currency,
+        name: 'Pizza Artisan',
+        description: 'Test Transaction',
+        order_id: data.orderId,
+        handler: async (response) => {
+          try {
+            const verifyPayload = {
+              ...response,
+              email: 'user@example.com', // In a real app, this comes from the logged-in user state
+              amount: total
+            };
+            const verifyRes = await fetch(`${API_URL}/api/payment/verify-payment`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(verifyPayload)
+            });
+            const verifyData = await verifyRes.json();
+            
+            if (verifyData.success) {
+              console.log('Payment Successful:', verifyData);
+              placeOrder(total, cartItems);
+              clearCart();
+              setOrderStatus('success');
+            } else {
+              alert('Payment verification failed.');
+            }
+          } catch (err) {
+            console.error('Error verifying payment:', err);
+            alert('Something went wrong during payment verification.');
+          }
+        },
+        prefill: {
+          name: 'Current User',
+          email: 'user@example.com',
+          contact: '9999999999'
+        },
+        theme: {
+          color: '#e63946'
+        }
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.on('payment.failed', function (response){
+        console.error('Payment failed:', response.error);
+        alert(`Payment failed: ${response.error.description}`);
+      });
+      rzp.open();
+    } catch (err) {
+      console.error('Error initiating payment:', err);
+      alert('Could not connect to payment gateway.');
+    }
   };
 
   if (orderStatus === 'success') {
@@ -126,21 +194,11 @@ const Cart = () => {
           whileTap={{ scale: 0.98 }}
           className="btn-primary"
           style={styles.checkoutBtn}
-          onClick={() => setShowPayment(true)}
+          onClick={initPayment}
         >
           Proceed to Pay ₹{total}
         </motion.button>
       </motion.div>
-
-      <AnimatePresence>
-        {showPayment && (
-          <RazorpayMock 
-            amount={total} 
-            onSuccess={handlePaymentSuccess} 
-            onClose={() => setShowPayment(false)} 
-          />
-        )}
-      </AnimatePresence>
     </div>
   );
 };

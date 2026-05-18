@@ -26,7 +26,7 @@ const AdminDashboard = () => {
   const [editValue, setEditValue] = useState('');
   const [refreshing, setRefreshing] = useState(false);
 
-  // Simulate real-time order updates
+  // updating fake live orders every minute so dashboard looks active
   useEffect(() => {
     const interval = setInterval(() => {
       setOrders(prevOrders => {

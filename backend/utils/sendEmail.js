@@ -1,10 +1,10 @@
 import nodemailer from 'nodemailer';
 
 const sendEmail = async (options) => {
-  // Using Ethereal Email for testing purposes
   const transporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
+    host: process.env.SMTP_HOST || 'smtp.ethereal.email',
+    port: process.env.SMTP_PORT || 587,
+    service: process.env.SMTP_SERVICE || undefined, // e.g., 'gmail'
     auth: {
       user: process.env.SMTP_EMAIL || 'ethereal.user@ethereal.email', // dummy fallback
       pass: process.env.SMTP_PASSWORD || 'etherealpass', // dummy fallback
