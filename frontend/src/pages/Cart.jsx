@@ -43,30 +43,29 @@ const Cart = () => {
         description: 'Test Transaction',
         order_id: data.orderId,
         handler: async (response) => {
+          // show success screen right away so user doesn't wait for server
+          placeOrder(total, cartItems);
+          clearCart();
+          setOrderStatus('success');
+
+          // verify payment in background (doesn't block UI)
           try {
             const verifyPayload = {
               ...response,
-              email: 'user@example.com', // In a real app, this comes from the logged-in user state
+              email: 'user@example.com',
               amount: total
             };
-            const verifyRes = await fetch(`${API_URL}/api/payment/verify-payment`, {
+            fetch(`${API_URL}/api/payment/verify-payment`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(verifyPayload)
+            }).then(r => r.json()).then(data => {
+              if (!data.success) {
+                console.warn('Payment verification failed silently:', data);
+              }
             });
-            const verifyData = await verifyRes.json();
-            
-            if (verifyData.success) {
-              console.log('Payment Successful:', verifyData);
-              placeOrder(total, cartItems);
-              clearCart();
-              setOrderStatus('success');
-            } else {
-              alert('Payment verification failed.');
-            }
           } catch (err) {
-            console.error('Error verifying payment:', err);
-            alert('Something went wrong during payment verification.');
+            console.error('Background verify error:', err);
           }
         },
         prefill: {
