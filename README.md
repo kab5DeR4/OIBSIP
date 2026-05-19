@@ -22,6 +22,10 @@ This is a MERN stack pizza delivery application that I built. It allows users to
 4. Run `npm run seed` to load initial pizzas
 5. Run `npm run dev` in both folders
 
+## ScreenShot
+<img width="1919" height="912" alt="image" src="https://github.com/user-attachments/assets/5177465f-e545-489d-a2e5-7541c82d79f7" />
+
+
+
 ## Live Demo
-* Frontend: (add vercel link here)
-* Backend: (add render link here)
+https://oibsip-chi.vercel.app/login
